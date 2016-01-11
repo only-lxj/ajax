@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="ajax.js"></script>
+    <script>
+        window.onload=function()
+        {
+            var oBtn1 = document.getElementById("btn1");
+            oBtn1.onclick = function ()
+            {
+                ajax('GET','a.txt?t='+new Date().getTime(),"none",
+                        function(str) {
+                            alert(str);
+                        },
+                        function () {
+                            alert("失败");
+                        })
+            }
+            var oBtn2=document.getElementById("btn2");
+            oBtn2.onclick=function()
+            {
+                ajax('GET','arr.txt',"none",
+                        function (str) {
+                            var arr1=eval(str);
+                            alert(arr1);
+                        },
+                        function () {
+
+                        })
+            }
+            var oBtn3=document.getElementById("btn3");
+            var oUl=document.getElementById("ul1");
+            oBtn3.onclick=function()
+            {
+                ajax('GET','json.txt',"none",
+                        function (str) {
+                            var arr2=eval(str);
+                            for(var i=0;i<arr2.length;i++)
+                            {
+                                var oLi=document.createElement('li');
+                                oLi.innerHTML='用户：<span>'+arr2[i].user+'</span><br/>密码：<span></span>'+arr2[i].password+'</span>';
+                                oUl.appendChild(oLi);
+                            }
+                        },
+                        function () {
+
+                        })
+            }
+        }
+    </script>
+</head>
+<body>
+<input type="button" id="btn1" value="读取" />
+<input type="button" id="btn2" value="读取数组" />
+<input type="button" id="btn3" value="读取json" />
+<ul id="ul1"></ul>
+</body>
+</html>
